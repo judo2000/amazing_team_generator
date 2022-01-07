@@ -1,5 +1,3 @@
-const generateHTML = require('./src/generatePage');
-
 // import file system package
 const fs = require('fs');
 
@@ -11,11 +9,15 @@ const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 
+// input the html generator
+const generateHTML = require('./src/generatePage');
+
 // create empty team array
 let teamArray = [];
 
+// function to build html and write team page
 function buildHTML() {
-  fs.writeFile('./dist/index.html', generateHTML(teamArray.join('')), err => {
+  fs.writeFile('./dist/index.html', generateHTML(teamArray), err => {
     // if there is an error
     if (err) {
       console.log(err);
@@ -23,12 +25,13 @@ function buildHTML() {
       // when the profile has been created
     } else {
       console.log(
-        'Your team profile has been successfully created! Please check out the index.html'
+        'Your team profile page has been created! Please check out the dist/index.html'
       );
     }
   });
 }
 
+// fuunction to add team manager
 const addManager = function () {
   return inquirer
     .prompt([
@@ -40,7 +43,7 @@ const addManager = function () {
           if (nameInput) {
             return true;
           } else {
-            console.log("Please enter the manager's name!");
+            console.log(`\n Please enter the manager's name!`);
             return false;
           }
         },
@@ -53,7 +56,7 @@ const addManager = function () {
           if (nameInput) {
             return true;
           } else {
-            console.log('Please enter employee id');
+            console.log(`\nPlease enter employee id`);
             return false;
           }
         },
@@ -67,7 +70,7 @@ const addManager = function () {
           if (valid) {
             return true;
           } else {
-            console.log('Please enter an email!');
+            console.log(`\nPlease enter an email!`);
             return false;
           }
         },
@@ -80,25 +83,23 @@ const addManager = function () {
           if (nameInput) {
             return true;
           } else {
-            console.log("Please enter and manager's office number");
+            console.log(`\nPlease enter and manager's office number`);
             return false;
           }
         },
       },
     ])
-    .then(managerInput => {
-      const { name, id, email, officeNumber } = managerInput;
+    .then(managerData => {
+      const { name, id, email, officeNumber } = managerData;
       const manager = new Manager(name, id, email, officeNumber);
       teamArray.push(manager);
-      console.log(teamArray);
-      console.log(manager.getRole());
-      console.log(manager.getName());
     });
 };
 
+// function to add employees (engineers and interns)
 const addEmployee = () => {
   console.log('Add an employee to the team');
-  inquirer
+  return inquirer
     .prompt([
       {
         type: 'list',
@@ -114,7 +115,7 @@ const addEmployee = () => {
           if (nameInput) {
             return true;
           } else {
-            console.log("Please enter the employee's name!");
+            console.log(`\nPlease enter the employee's name!`);
             return false;
           }
         },
@@ -127,7 +128,7 @@ const addEmployee = () => {
           if (nameInput) {
             return true;
           } else {
-            console.log('Please enter employee id');
+            console.log(`\Please enter employee id`);
             return false;
           }
         },
@@ -141,7 +142,7 @@ const addEmployee = () => {
           if (valid) {
             return true;
           } else {
-            console.log('Please enter an email!');
+            console.log(`\Please enter employee's email!`);
             return false;
           }
         },
@@ -156,7 +157,7 @@ const addEmployee = () => {
           if (nameInput) {
             return true;
           } else {
-            console.log("Please enter and manager's office number");
+            console.log(`\nPlease enter engineer's github username`);
             return false;
           }
         },
@@ -170,7 +171,7 @@ const addEmployee = () => {
           if (nameInput) {
             return true;
           } else {
-            console.log("Please enter and manager's office number");
+            console.log(`\Please enter intern's school name:`);
             return false;
           }
         },
@@ -182,17 +183,15 @@ const addEmployee = () => {
         default: false,
       },
     ])
-    .then(employeeInput => {
+    .then(employeeData => {
       let { name, id, email, role, github, school, confirmAddEmployee } =
-        employeeInput;
-      let employee;
+        employeeData;
+      let employee = '';
 
       if (role === 'Engineer') {
         employee = new Engineer(name, id, email, github);
-        console.log(employee);
       } else if (role === 'Intern') {
         employee = new Intern(name, id, email, school);
-        console.log(employee);
       }
 
       teamArray.push(employee);
@@ -207,22 +206,6 @@ const addEmployee = () => {
 
 addManager()
   .then(addEmployee)
-  //.then(console.log(teamArray))
-
-  //   fs.writeFile('./dist/index.html', generateHTML(teamArray), err => {
-  //     // if there is an error
-  //     if (err) {
-  //       console.log(err);
-  //       return;
-  //       // when the profile has been created
-  //     } else {
-  //       console.log(
-  //         'Your team profile has been successfully created! Please check out the index.html'
-  //       );
-  //     }
-  //   });
-  // })
-
   .catch(err => {
     console.log(err);
   });

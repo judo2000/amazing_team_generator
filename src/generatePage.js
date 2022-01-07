@@ -1,70 +1,45 @@
-const managerCard = function (data) {
-  return `<div col-md-4 col-sm-12 mt-4>
-    <div class="card">
-            <div class="card-header">
-                ${data.name}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">${data.role}</h5>
-                <p class="card-text">ID: ${data.id}</p>
-                <p class="card-text">ID: ${data.email}</p>
-                <p class="card-text">ID: ${data.officeNumber}</p>
-            </div>
-        </div>
-    </div>`;
-};
+// import bard builders
+const buildManagerCard = require('./buildManagerCard');
+const buildEngineerCard = require('./buildEngineerCard');
+const buildInternCard = require('./buildInternCard');
 
-const engineerCard = function (engineer) {
-  return `<div col-md-4 col-sm-12 mt-4>
-      <div class="card">
-              <div class="card-header">
-                  ${engineer.name}
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title">${engineer.role}</h5>
-                  <p class="card-text">ID: ${engineer.id}</p>
-                  <p class="card-text">ID: ${engineer.email}</p>
-                  <p class="card-text">ID: ${engineer.github}</p>
-              </div>
-          </div>
-      </div>`;
-};
+generateHTML = employees => {
+  // array for cards
+  htmlArray = [];
+  for (let employee of employees) {
+    const role = employee.getRole();
 
-const internCard = function (intern) {
-  return `<div col-md-4 col-sm-12 mt-4>
-        <div class="card">
-                <div class="card-header">
-                    ${intern.name}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">${intern.role}</h5>
-                    <p class="card-text">ID: ${intern.id}</p>
-                    <p class="card-text">ID: ${intern.email}</p>
-                    <p class="card-text">ID: ${intern.school}</p>
-                </div>
-            </div>
-        </div>`;
-};
+    if (role === 'Manager') {
+      const managerCard = buildManagerCard(employee);
 
-// const generateHTML = data => {
-//   pageArray = [];
-//   for (let i = 0; i < data.length; i++) {
-//     let employee = data[i];
-//     const role = employee.getRole();
+      htmlArray.push(managerCard);
+    }
 
-//     // call manager function
-//     if (role === 'Manager') {
-//       const managerCard = generateManager(employee);
+    // call engineer function
+    if (role === 'Engineer') {
+      const engineerCard = buildEngineerCard(employee);
 
-//       pageArray.push(managerCard);
-//       console.log(managerCard);
-//     }
-//   }
-// };
-function generateHTML(teamArray) {
-  for (let i = 1; i < teamArray.length; i++) {
-    console.log(teamArray[i]);
+      htmlArray.push(engineerCard);
+    }
+
+    // call intern function
+    if (role === 'Intern') {
+      const internCard = buildInternCard(employee);
+
+      htmlArray.push(internCard);
+    }
   }
+
+  // join htmlArray to create html string
+  const employeeCards = htmlArray.join('');
+
+  // call generatePage function passing in employee Cards
+  // to generate and return team page html
+  const generateTeamPage = generatePage(employeeCards);
+  return generateTeamPage;
+};
+
+function generatePage(employeeCards) {
   return `<!doctype html>
       <html lang="en">
           <head>
@@ -76,24 +51,36 @@ function generateHTML(teamArray) {
               <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
               <!-- Bootstrap CSS -->
               <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-              <link rel="stylesheet" href="assets/css/style.css">
+              <!-- Font Awesome-->
+              <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+                integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+                crossorigin="anonymous"
+              />
+              <!-- Custom Styles -->
+              <link rel="stylesheet" href="./style.css">
               <title>Team Profile</title>
           </head>
           <body>
               <header class="header">
                   <div class="row">
-                      <div class="col-lg-10 header_text text-center">
+                      <div class="col header_text text-center">
                           <h1>Our Team</h1>
                       </div>
                   </div>
               </header>
 
               <main>
-                  <div class="container-fluid">
-                      <div class="row text-center">
-                      
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-12">
+                      <div class="row justify-content-center">
+                        ${employeeCards}
                       </div>
+                    </div>
                   </div>
+                </div>
               </main>
 
               <footer class="footer pt-3">
@@ -102,7 +89,7 @@ function generateHTML(teamArray) {
                   @ 2021. All Rights Reserved
               </footer>
 
-              // Bootstrap
+              <!-- Bootstrap -->
               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
           </body>
       </html>`;
