@@ -74,7 +74,7 @@ footer {
     margin-right: auto;
     margin-left: auto;
   }
-  .row.col {
+  .row .col {
     padding-right: 0;
   }
   footer {
