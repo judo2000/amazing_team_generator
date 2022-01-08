@@ -71,10 +71,12 @@ footer {
     width: 40rem;
     margin-bottom: 10%;
     padding-right: 0;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
   }
-  .row .col {
+  .row {
+    padding-right: 0;
+  }
+  .col {
     padding-right: 0;
   }
   footer {
