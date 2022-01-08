@@ -68,21 +68,10 @@ footer {
 /* Media Queries */
 @media screen and (max-width: 850px) {
   main {
-    width: 40rem;
     margin-bottom: 10%;
-    padding-right: 0;
-    margin: 0 auto;
   }
-  .row {
-    padding-right: 0;
-  }
-  .col {
-    padding-right: 0;
-  }
+
   footer {
     margin-top: 10%;
-  }
-  .card {
-    padding-right: 0;
   }
 }
