@@ -64,3 +64,10 @@ footer {
   color: #fff;
   font-weight: bold;
 }
+
+/* Media Queries */
+@media screen and (max-width: 850px) {
+  .card {
+    height: 30rem;
+  }
+}
