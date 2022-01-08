@@ -82,4 +82,7 @@ footer {
   footer {
     margin-top: 10%;
   }
+  .card {
+    padding-right: 0;
+  }
 }
