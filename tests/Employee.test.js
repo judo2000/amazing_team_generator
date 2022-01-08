@@ -5,6 +5,10 @@ describe('Employee', () => {
     const employee = new Employee('Stephen', 40, 'judo2000@comcast.net');
 
     expect(employee.name).toEqual(expect.stringContaining('Stephen'));
+    expect(employee.id).toEqual(expect.any(Number));
+    expect(employee.email).toEqual(
+      expect.stringContaining('judo2000@comcast.net')
+    );
   });
 
   it("Should get the employee's name with the getName() method ", () => {
