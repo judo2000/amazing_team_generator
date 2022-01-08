@@ -5,33 +5,33 @@ const buildInternCard = require('./buildInternCard');
 
 generateHTML = employees => {
   // array for cards
-  htmlArray = [];
+  cardArray = [];
   for (let employee of employees) {
     const role = employee.getRole();
 
     if (role === 'Manager') {
       const managerCard = buildManagerCard(employee);
 
-      htmlArray.push(managerCard);
+      cardArray.push(managerCard);
     }
 
     // call engineer function
     if (role === 'Engineer') {
       const engineerCard = buildEngineerCard(employee);
 
-      htmlArray.push(engineerCard);
+      cardArray.push(engineerCard);
     }
 
     // call intern function
     if (role === 'Intern') {
       const internCard = buildInternCard(employee);
 
-      htmlArray.push(internCard);
+      cardArray.push(internCard);
     }
   }
 
-  // join htmlArray to create html string
-  const employeeCards = htmlArray.join('');
+  // join cardArray to create html string
+  const employeeCards = cardArray.join('');
 
   // call generatePage function passing in employee Cards
   // to generate and return team page html
