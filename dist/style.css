@@ -70,14 +70,10 @@ footer {
   main {
     margin-bottom: 10%;
     padding-right: 0;
-    margin-right: 0;
+    margin-right: auto;
+    margin-left: auto;
   }
   footer {
     margin-top: 10%;
-  }
-  .col-12 {
-    padding: 0;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
