@@ -25,6 +25,9 @@ The application allows the user to build a team profile page by adding employee 
   
 ## Usage
 [![Poject Name Screen Shot][project-screenshot]](https://judo2000.github.io/amazing_team_generator/)
+
+[Click here to view the demo](https://drive.google.com/file/d/132tKW4RZY5nJ7uZV1a19GzCAf4viV5PX/view?usp=sharing).
+
 <ul><li>From the command line, run the command: <code>node index</code></li><li>First enter all the team manager's information</li><li>You will be prompted to add an employee.  Select Engineer or Intern and enter the requestion information.</li><li>After enter the first Engineer or Intern you will be asked if you would like to add another employee.  Enter y or n</li><li>Once you have enter all employees, select n when prompted and your team profile page will named index.html will be saved in the dist/ folder</li></ul>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
