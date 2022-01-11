@@ -48,4 +48,4 @@ Email: [judo2000@comcast.net](judo2000@comcast.net)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-[product-screenshot]: team_generator_screenshott.png
+[project-screenshot]: team_generator_screenshott.png
